@@ -20,3 +20,7 @@ Run `make` and it will compile the program to `btime-to-xattr`.
 ```
 Usage: ./btime-to-xattr <path>
 ```
+
+### TODO
+- util to show the saved btime xattr
+- AUR package
