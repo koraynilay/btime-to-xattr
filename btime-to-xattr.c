@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	struct statx_timestamp btime = statxbuf->stx_btime;
+	struct statx_timestamp *btime = &statxbuf->stx_btime;
 
-	printf("setting btime: sec: %llu, nsec: %u\n", btime.tv_sec, btime.tv_nsec);
+	printf("setting btime: sec: %llu, nsec: %u\n", btime->tv_sec, btime->tv_nsec);
 
-	ret = setxattr(path, BTIME_XATTR_NAME, (const void*)&btime, sizeof(btime), XATTR_CREATE);
+	ret = setxattr(path, BTIME_XATTR_NAME, btime, sizeof(*btime), XATTR_CREATE);
 	if(ret < 0) {
 		if(errno == EEXIST) {
 			printf("nevermind, btime xattr already set\n");
