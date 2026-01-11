@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 	struct statx *statxbuf = calloc(1, sizeof(struct statx));
 
 	ret = statx(AT_FDCWD, path, AT_SYMLINK_NOFOLLOW | AT_NO_AUTOMOUNT, STATX_BTIME, statxbuf);
-	if(ret != 0) {
+	if(ret < 0) {
 		perror("statx failed");
 		return 1;
 	}
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 	printf("setting btime: sec: %llu, nsec: %u\n", btime.tv_sec, btime.tv_nsec);
 
 	ret = setxattr(path, BTIME_XATTR_NAME, (const void*)&btime, sizeof(btime), XATTR_CREATE);
-	if(ret != 0) {
+	if(ret < 0) {
 		if(errno == EEXIST) {
 			printf("nevermind, btime xattr already set\n");
 			return 0;
@@ -41,4 +41,5 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("btime set successfully in %s for %s\n", BTIME_XATTR_NAME, path);
+	return 0;
 }

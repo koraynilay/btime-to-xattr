@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	struct statx_timestamp btime;
 
 	ret = getxattr(path, BTIME_XATTR_NAME, (void*)&btime, sizeof(btime));
-	if(ret != sizeof(btime)) {
+	if(ret < 0) {
 		perror("getxattr failed");
 		return 1;
 	}
