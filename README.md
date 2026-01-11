@@ -23,4 +23,3 @@ Usage: ./btime-to-xattr <path>
 
 ### TODO
 - AUR package
-- add standard options and replace/replace-only option that disables XATTR_CREATE/XATTR_REPLACE

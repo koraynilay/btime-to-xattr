@@ -2,11 +2,12 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <sysexits.h>
 
 int main(int argc, char *argv[]) {
 	if(argc < 2) {
 		fprintf(stderr, "Usage: %s <path> [date arguments]\n", argv[0]);
-		return 1;
+		return EX_USAGE;
 	}
 
 	int ret = 0;
@@ -16,7 +17,7 @@ int main(int argc, char *argv[]) {
 	ret = getxattr(path, BTIME_XATTR_NAME, (void*)&btime, sizeof(btime));
 	if(ret < 0) {
 		perror("getxattr failed");
-		return 1;
+		return EX_NOINPUT;
 	}
 
 	printf("found btime: sec: %llu, nsec: %u\n", btime.tv_sec, btime.tv_nsec);
@@ -36,5 +37,5 @@ int main(int argc, char *argv[]) {
 
 	execvp("date", args);
 
-	return 0;
+	return EX_OK;
 }
