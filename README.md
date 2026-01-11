@@ -24,3 +24,4 @@ Usage: ./btime-to-xattr <path>
 ### TODO
 - util to show the saved btime xattr
 - AUR package
+- add standard options and replace/replace-only option that disables XATTR_CREATE/XATTR_REPLACE
