@@ -1,12 +1,8 @@
-#define _GNU_SOURCE
+#include "common.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/xattr.h>
-
-#define BTIME_XATTR_NAME "user.btime"
 
 int main(int argc, char *argv[]) {
 	if(argc < 2) {
